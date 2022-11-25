@@ -15,3 +15,68 @@
     align-items: center;    
 }  
 
+#quote-box{
+    background-color: var(--corBase);
+    color: var(--corDestaque);
+    width: 550px;
+    min-height: 250px;
+    padding: 40px;
+    border-radius: 5px;
+}
+
+#text{
+    font-size: 1.7rem;
+    margin: 0 10px;
+    text-align: center;
+}
+  
+#text::before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f10d  ";
+}
+
+#author{
+    text-align: right;
+    margin: 25px 0;
+}
+  
+#author::before{
+    content: '- ';
+}
+
+.botoes{
+    display: flex;
+    justify-content: space-between;      
+}
+  
+.fa-brands{
+    color: var(--corDestaque);
+    font-size: 1.3rem;
+    margin-right: .4rem;
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    text-align: center;
+    color: var(--corBase);
+    border-radius: 5px;
+}
+
+.btn, .btn:hover{
+    background-color: var(--corDestaque);
+    color: var(--corBase);
+    font-size: .9rem;
+}
+
+footer{
+    font-size: .8rem;
+    padding: 10px;
+}
+  
+footer, footer a{  
+    color: var(--corBase);
+}
+  
+a{
+   text-decoration: none;
+}

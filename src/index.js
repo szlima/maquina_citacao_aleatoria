@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom';
 
 import './estilo.css';
 
+import Principal from './Principal';
+
 ReactDOM.render(
-  <h1>Máquina de citação aleatória</h1>,
+  <Principal/>,
   document.querySelector('#root')
 );
