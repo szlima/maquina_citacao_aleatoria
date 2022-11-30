@@ -80,3 +80,12 @@ footer, footer a{
 a{
    text-decoration: none;
 }
+
+.incompleto{
+    background-color: var(--corDestaque);
+    color: var(--corBase);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}

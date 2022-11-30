@@ -1,51 +1,62 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
-function Principal({citacoes}){    
+import {carregarCitacoesAction} from './redux/actions/actionCreators';
+
+function Principal({citacoes, carregando, erro, carregarCitacoes}){    
   
     const numCitacao= 0, corCitacao= 'hotpink';
-        
-    document.querySelector('#root').style.backgroundColor= corCitacao;
-    const autor= citacoes[numCitacao] ?
-                    citacoes[numCitacao].author ?
-                        citacoes[numCitacao].author
-                        : 'Autor desconhecido'
-                    : '';
+    
+    useEffect(() => { 
+        carregarCitacoes();
+    }, []);
+
+    document.querySelector('#root').style.backgroundColor= corCitacao;                    
     
     return (    
-      citacoes.length !== 0 ?
-        (<React.Fragment>
+        carregando ? 
+            <div id='quote-box' className='incompleto'><p>Carregando</p></div>
+            : erro ? 
+                <div id='quote-box' className='incompleto'><p>{erro}</p></div>
+                : citacoes.length !== 0 ?
 
-            <div id='quote-box' style={{color: corCitacao}}>
-                <div id='text'>{citacoes[numCitacao].text}</div>
-                <div id='author'>{autor}</div>
-                
-                <div className='botoes'>
-                    <div className='botoes-share'>
-                        <a id='tweet-quote' target="_top" className='twitter-share-button' href={'#'}>
-                            <i className="fa-brands fa-twitter" style={{backgroundColor: corCitacao}}></i>
-                        </a>
-                        <a target="_blank" href={'#'}>     
-                            <i className="fa-brands fa-tumblr" style={{backgroundColor: corCitacao}}></i>
-                        </a>
-                    </div>
-                    <button id='new-quote' className='btn' style={{backgroundColor: corCitacao}}>New quote</button>
-                </div>
-            </div>
+                    (<React.Fragment>
+                        <div id='quote-box' style={{color: corCitacao}}>
+                            <div id='text'>{citacoes[numCitacao].text}</div>
+                            <div id='author'>{
+                                citacoes[numCitacao].author ? citacoes[numCitacao].author : 'Autor desconhecido'
+                            }</div>
+                            
+                            <div className='botoes'>
+                                <div className='botoes-share'>  
+                                    <a id='tweet-quote' target="_top" className='twitter-share-button' href={'#'}>
+                                        <i className="fa-brands fa-twitter" style={{backgroundColor: corCitacao}}></i>
+                                    </a>
+                                    <a target="_blank" href={'#'}>                                             
+                                        <i className="fa-brands fa-tumblr" style={{backgroundColor: corCitacao}}></i>
+                                    </a>
+                                </div>
+                                <button id='new-quote' className='btn' style={{backgroundColor: corCitacao}}>New quote</button>
+                            </div>
 
-            <footer>
-                by <a href='#'>hezag</a>
-            </footer>
-        </React.Fragment>)
-        : 
-        <div id='quote-box' className='incompleto'>
-            <p>Não há citações</p>
-        </div>      
-    );
+                        </div>
+                        <footer>
+                            by <a href='#'>hezag</a>
+                        </footer>
+                    </React.Fragment>)
+
+                    : <div id='quote-box' className='incompleto'><p>Não há citações</p></div>      
+    );    
 }
 
 const mapStateToProps= state => ({
     citacoes: state.citacoesReducer.citacoes,
+    carregando: state.citacoesReducer.carregando,
+    erro: state.citacoesReducer.erro
 });
 
-export default connect(mapStateToProps)(Principal);
+const mapDispatchToProps= dispatch => ({
+    carregarCitacoes: () => dispatch(carregarCitacoesAction())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Principal);

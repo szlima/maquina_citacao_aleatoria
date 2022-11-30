@@ -1,6 +1,7 @@
-import {CARREGAR_CITACOES_INICIO, CARREGAR_CITACOES_SUCESSO, CARREGAR_CITACOES_ERRO} from './actionTypes';
+import {CARREGAR_CITACOES_INICIO, CARREGAR_CITACOES_SUCESSO, CARREGAR_CITACOES_ERRO, SOLICITAR_CITACAO} from './actionTypes';
+import {getCitacoes} from '../../dados';
 
-export const carregarCitacoesInicio= () => ({
+const carregarCitacoesInicio= () => ({
     type: CARREGAR_CITACOES_INICIO
 });
 
@@ -18,6 +19,17 @@ const carregarCitacoesErro= () => ({
     }
 });
 
-const solicitarCitacaoAction= () => ({
-    type: SOLICITAR_CITACAO
+export const carregarCitacoesAction= () => {
+  return dispatch => {
+    dispatch(carregarCitacoesInicio());
+    
+    getCitacoes()
+    .then(citacoes => dispatch(carregarCitacoesSucesso(citacoes)))
+    .catch(() => dispatch(carregarCitacoesErro()));
+    
+  };
+};
+
+export const solicitarCitacaoAction= () => ({
+  type: SOLICITAR_CITACAO
 });

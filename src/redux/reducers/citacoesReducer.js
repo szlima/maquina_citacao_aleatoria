@@ -1,14 +1,13 @@
 import {CARREGAR_CITACOES_INICIO, CARREGAR_CITACOES_SUCESSO, CARREGAR_CITACOES_ERRO} from '../actions/actionTypes';
-import {getCitacoes} from '../../dados';
 
 const estadoInicial= {
-    citacoes: getCitacoes(),
-    carregando: false,
-    erro: ''
+  citacoes: [],
+  carregando: false,
+  erro: ''
 };
 
 export default function citacoesReducer(state=estadoInicial, action){
-    
+  
   switch(action.type){
     case CARREGAR_CITACOES_INICIO:
       return {
