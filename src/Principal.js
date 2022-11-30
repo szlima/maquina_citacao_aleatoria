@@ -1,11 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
-import {getCitacoes} from './dados';
-
-function Principal(){    
+function Principal({citacoes}){    
   
-    const numCitacao= 0, corCitacao= 'hotpink',
-    citacoes= getCitacoes();
+    const numCitacao= 0, corCitacao= 'hotpink';
         
     document.querySelector('#root').style.backgroundColor= corCitacao;
     const autor= citacoes[numCitacao] ?
@@ -44,6 +42,10 @@ function Principal(){
             <p>Não há citações</p>
         </div>      
     );
-  }
+}
 
-  export default Principal;
+const mapStateToProps= state => ({
+    citacoes: state.citacoesReducer.citacoes,
+});
+
+export default connect(mapStateToProps)(Principal);
