@@ -3,10 +3,8 @@ import {connect} from 'react-redux';
 
 import {carregarCitacoesAction} from './redux/actions/actionCreators';
 
-function Principal({citacoes, carregando, erro, carregarCitacoes}){    
+function Principal({citacoes, carregando, erro, numCitacao, corCitacao, carregarCitacoes}){    
   
-    const numCitacao= 0, corCitacao= 'hotpink';
-    
     useEffect(() => { 
         carregarCitacoes();
     }, []);
@@ -52,7 +50,9 @@ function Principal({citacoes, carregando, erro, carregarCitacoes}){
 const mapStateToProps= state => ({
     citacoes: state.citacoesReducer.citacoes,
     carregando: state.citacoesReducer.carregando,
-    erro: state.citacoesReducer.erro
+    erro: state.citacoesReducer.erro,
+    numCitacao: state.citacoesReducer.numCitacao,
+    corCitacao: state.citacoesReducer.corCitacao
 });
 
 const mapDispatchToProps= dispatch => ({

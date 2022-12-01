@@ -1,9 +1,12 @@
 import {CARREGAR_CITACOES_INICIO, CARREGAR_CITACOES_SUCESSO, CARREGAR_CITACOES_ERRO} from '../actions/actionTypes';
+import {gerarNovaCitacao} from '../../funcoes';
 
 const estadoInicial= {
   citacoes: [],
   carregando: false,
-  erro: ''
+  erro: '',
+  numCitacao: -1,
+  corCitacao: ''
 };
 
 export default function citacoesReducer(state=estadoInicial, action){
@@ -19,7 +22,8 @@ export default function citacoesReducer(state=estadoInicial, action){
       return {
         ...state,
         carregando: false,
-        citacoes: action.payload.citacoes
+        citacoes: action.payload.citacoes,
+        ...gerarNovaCitacao(state.numCitacao, action.payload.citacoes.length)
       };
         
     case CARREGAR_CITACOES_ERRO:
