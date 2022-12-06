@@ -9,7 +9,9 @@ function Principal({citacoes, carregando, erro, numCitacao, corCitacao, carregar
         carregarCitacoes();
     }, []);
 
-    document.querySelector('#root').style.backgroundColor= corCitacao;                    
+    document.querySelector('#root').style.backgroundColor= corCitacao;
+    const autor= !carregando && !erro && citacoes.length !== 0 && citacoes[numCitacao].author ? 
+        citacoes[numCitacao].author : 'Autor desconhecido';
     
     return (    
         carregando ? 
@@ -21,16 +23,16 @@ function Principal({citacoes, carregando, erro, numCitacao, corCitacao, carregar
                     (<React.Fragment>
                         <div id='quote-box' style={{color: corCitacao}}>
                             <div id='text'>{citacoes[numCitacao].text}</div>
-                            <div id='author'>{
-                                citacoes[numCitacao].author ? citacoes[numCitacao].author : 'Autor desconhecido'
-                            }</div>
+                            <div id='author'>{autor}</div>
                             
                             <div className='botoes'>
                                 <div className='botoes-share'>  
-                                    <a id='tweet-quote' target="_top" className='twitter-share-button' href={'#'}>
+                                    <a id='tweet-quote' target="_top" className='twitter-share-button' href={`https://twitter.com/intent/tweet?text=%22${citacoes[numCitacao].text}%22%20%28${autor}%29%20&hashtags=quote`}>
                                         <i className="fa-brands fa-twitter" style={{backgroundColor: corCitacao}}></i>
                                     </a>
-                                    <a target="_blank" href={'#'}>                                             
+                                    <a target="_blank" href={`https://www.tumblr.com/widgets/share/tool?posttype=quote&content=${citacoes[numCitacao].text}&caption=${autor}&tags=quote
+&canonicalUrl=https%3A%2F%2Fwww.tumblr.com`}>
+                                        {/* canonicalUrl se refere ao site de onde veio a citacao, a fonte. Neste caso seria https://www.tumblr.com*/}
                                         <i className="fa-brands fa-tumblr" style={{backgroundColor: corCitacao}}></i>
                                     </a>
                                 </div>

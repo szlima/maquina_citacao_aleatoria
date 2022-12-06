@@ -16,7 +16,8 @@
 }  
 
 #quote-box{
-    background-color: var(--corBase);    
+    background-color: var(--corBase); 
+    color: var(--corDestaque);   
     width: 550px;
     min-height: 250px;
     padding: 40px;
@@ -79,9 +80,7 @@ a{
    text-decoration: none;
 }
 
-.incompleto{
-    background-color: var(--corDestaque);
-    color: var(--corBase);
+.incompleto{    
     display: flex;
     justify-content: center;
     align-items: center;
