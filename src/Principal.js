@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 
-import {carregarCitacoesAction} from './redux/actions/actionCreators';
+import {carregarCitacoesAction, solicitarCitacaoAction} from './redux/actions/actionCreators';
 
-function Principal({citacoes, carregando, erro, numCitacao, corCitacao, carregarCitacoes}){    
+function Principal({citacoes, carregando, erro, numCitacao, corCitacao, carregarCitacoes, solicitarCitacao}){    
   
     useEffect(() => { 
         carregarCitacoes();
@@ -34,7 +34,7 @@ function Principal({citacoes, carregando, erro, numCitacao, corCitacao, carregar
                                         <i className="fa-brands fa-tumblr" style={{backgroundColor: corCitacao}}></i>
                                     </a>
                                 </div>
-                                <button id='new-quote' className='btn' style={{backgroundColor: corCitacao}}>New quote</button>
+                                <button id='new-quote' className='btn' onClick={solicitarCitacao} style={{backgroundColor: corCitacao}}>New quote</button>
                             </div>
 
                         </div>
@@ -56,7 +56,8 @@ const mapStateToProps= state => ({
 });
 
 const mapDispatchToProps= dispatch => ({
-    carregarCitacoes: () => dispatch(carregarCitacoesAction())
+    carregarCitacoes: () => dispatch(carregarCitacoesAction()),
+    solicitarCitacao: () => dispatch(solicitarCitacaoAction())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Principal);

@@ -5,7 +5,7 @@
 
 #root{
     background-color: var(--corDestaque);
-
+    color: var(--corBase);
     height: 100vh;
     width: 100vw;
 
@@ -16,8 +16,7 @@
 }  
 
 #quote-box{
-    background-color: var(--corBase);
-    color: var(--corDestaque);
+    background-color: var(--corBase);    
     width: 550px;
     min-height: 250px;
     padding: 40px;
@@ -51,7 +50,6 @@
 }
   
 .fa-brands{
-    color: var(--corDestaque);
     font-size: 1.3rem;
     margin-right: .4rem;
     width: 40px;
@@ -62,7 +60,7 @@
     border-radius: 5px;
 }
 
-.btn, .btn:hover{
+#new-quote{
     background-color: var(--corDestaque);
     color: var(--corBase);
     font-size: .9rem;
