@@ -1,16 +1,31 @@
-import {CARREGAR_CITACOES_INICIO, CARREGAR_CITACOES_SUCESSO, CARREGAR_CITACOES_ERRO, SOLICITAR_CITACAO} from './actionTypes';
-import {getCitacoes} from '../../dados';
+import {
+  CARREGAR_CITACOES_INICIO, CARREGAR_CITACOES_SUCESSO, CARREGAR_CITACOES_ERRO, GERAR_NOVA_CITACAO
+} from './actionTypes';
+
+import {getCitacao, getCitacoes} from '../../funcoes';
 
 const carregarCitacoesInicio= () => ({
     type: CARREGAR_CITACOES_INICIO
 });
 
-const carregarCitacoesSucesso= citacoes => ({
+const carregarCitacoes= (citacoes, citacao) => ({
     type: CARREGAR_CITACOES_SUCESSO,
     payload: {
-      citacoes
+      citacoes,
+      citacao
     }
 });
+
+const carregarCitacoesSucesso= citacoes => {
+  return (dispatch, getState) => {
+    const citacao= getCitacao(
+      getState().citacoesReducer.numCitacao, 
+      citacoes.length
+    );
+
+    dispatch(carregarCitacoes(citacoes, citacao));
+  };
+};
 
 const carregarCitacoesErro= () => ({
     type: CARREGAR_CITACOES_ERRO,
@@ -30,6 +45,20 @@ export const carregarCitacoesAction= () => {
   };
 };
 
-export const solicitarCitacaoAction= () => ({
-  type: SOLICITAR_CITACAO
+const gerarNovaCitacao= citacao => ({ 
+  type: GERAR_NOVA_CITACAO,
+  payload: {
+    citacao
+  }
 });
+
+export const gerarNovaCitacaoAction= () => {
+  return (dispatch, getState) => {
+    const citacao= getCitacao(
+      getState().citacoesReducer.numCitacao, 
+      getState().citacoesReducer.citacoes.length
+    );
+
+    dispatch(gerarNovaCitacao(citacao));
+  };
+};

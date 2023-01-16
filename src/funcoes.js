@@ -1,4 +1,4 @@
-export const gerarNovaCitacao= (numAnterior, totalCitacoes) => {  
+export const getCitacao= (numAnterior, totalCitacoes) => {  
   
     let numCitacao= Math.floor(Math.random() * totalCitacoes);
     const letras= '0123456789';
@@ -11,4 +11,9 @@ export const gerarNovaCitacao= (numAnterior, totalCitacoes) => {
         corCitacao+= letras[Math.floor(Math.random() * letras.length)];
   
     return {numCitacao, corCitacao};
+};
+
+export const getCitacoes= async () => {
+    const dados= await fetch('https://type.fit/api/quotes');
+    return await dados.json();
 };
